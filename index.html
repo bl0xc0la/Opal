@@ -1,274 +1,191 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Opal Browser</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Opal | Browse with Clarity</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Palette derived from your Opal Logo */
+            --bg: #080808;
+            --accent-gradient: linear-gradient(135deg, #a855f7 0%, #4f46e5 50%, #06b6d4 100%);
+            --glass: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --text-dim: #94a3b8;
+        }
 
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
-<style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:'Roboto',sans-serif;
-}
+        body {
+            background-color: var(--bg);
+            color: white;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
 
-body{
-    background:#f5f7fb;
-    color:#111;
-    overflow-x:hidden;
-}
+        /* Ambient Glow (Zen Aesthetic) */
+        .glow {
+            position: fixed;
+            top: -10%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 600px;
+            height: 400px;
+            background: var(--accent-gradient);
+            filter: blur(120px);
+            opacity: 0.15;
+            z-index: -1;
+        }
 
-header{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    padding:24px 8%;
-}
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 10%;
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
 
-.logo{
-    display:flex;
-    align-items:center;
-    gap:12px;
-    font-size:28px;
-    font-weight:900;
-}
+        .logo {
+            font-weight: 700;
+            font-size: 1.5rem;
+            letter-spacing: -1px;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
 
-.logo img{
-    width:48px;
-    height:48px;
-}
+        .hero {
+            height: 90vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 20px;
+        }
 
-.nav{
-    display:flex;
-    gap:30px;
-}
+        h1 {
+            font-size: clamp(3rem, 8vw, 5rem);
+            font-weight: 700;
+            letter-spacing: -3px;
+            margin-bottom: 1rem;
+        }
 
-.nav a{
-    text-decoration:none;
-    color:#444;
-    font-weight:500;
-}
+        .hero p {
+            color: var(--text-dim);
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin-bottom: 2.5rem;
+        }
 
-.download-btn{
-    background:#0F4FB2;
-    color:white;
-    padding:12px 24px;
-    border-radius:12px;
-    text-decoration:none;
-    font-weight:600;
-}
+        /* The Zen-Style Button */
+        .btn-download {
+            background: white;
+            color: black;
+            padding: 14px 32px;
+            border-radius: 100px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 1px solid white;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
 
-.hero{
-    min-height:90vh;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    padding:0 8%;
-}
+        .btn-download:hover {
+            background: transparent;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+        }
 
-.hero-content{
-    max-width:700px;
-}
+        /* Feature Cards */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            padding: 4rem 10%;
+        }
 
-.hero h1{
-    font-size:clamp(4rem,8vw,7rem);
-    line-height:0.95;
-    font-weight:900;
-    color:#0F4FB2;
-}
+        .card {
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            padding: 2.5rem;
+            border-radius: 24px;
+            transition: border 0.3s ease;
+        }
 
-.hero p{
-    margin-top:25px;
-    font-size:1.2rem;
-    color:#555;
-    line-height:1.8;
-}
+        .card:hover {
+            border-color: rgba(168, 85, 247, 0.4);
+        }
 
-.hero-buttons{
-    margin-top:35px;
-    display:flex;
-    gap:15px;
-    flex-wrap:wrap;
-}
+        .card h3 {
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
 
-.primary{
-    background:#0F4FB2;
-    color:white;
-    padding:15px 30px;
-    border-radius:14px;
-    text-decoration:none;
-    font-weight:700;
-}
+        .card p {
+            color: var(--text-dim);
+        }
 
-.secondary{
-    background:white;
-    color:#111;
-    border:1px solid #ddd;
-    padding:15px 30px;
-    border-radius:14px;
-    text-decoration:none;
-    font-weight:700;
-}
-
-.browser-preview{
-    margin-top:60px;
-    background:rgba(255,255,255,0.8);
-    backdrop-filter:blur(20px);
-    border:1px solid rgba(255,255,255,0.4);
-    border-radius:24px;
-    overflow:hidden;
-    box-shadow:0 25px 60px rgba(0,0,0,.08);
-}
-
-.browser-bar{
-    background:white;
-    padding:18px;
-    border-bottom:1px solid #eee;
-    display:flex;
-    gap:10px;
-}
-
-.dot{
-    width:12px;
-    height:12px;
-    border-radius:50%;
-    background:#d0d0d0;
-}
-
-.browser-content{
-    height:350px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    background:linear-gradient(
-        135deg,
-        #0F4FB2,
-        #5A74FF
-    );
-}
-
-.browser-content h2{
-    color:white;
-    font-size:3rem;
-    font-weight:900;
-}
-
-.features{
-    padding:120px 8%;
-}
-
-.features h2{
-    text-align:center;
-    font-size:3rem;
-    margin-bottom:60px;
-}
-
-.grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-    gap:25px;
-}
-
-.card{
-    background:white;
-    padding:30px;
-    border-radius:24px;
-    box-shadow:0 10px 30px rgba(0,0,0,.05);
-}
-
-.card h3{
-    margin-bottom:12px;
-}
-
-footer{
-    text-align:center;
-    padding:40px;
-    color:#666;
-}
-</style>
+        footer {
+            padding: 4rem;
+            text-align: center;
+            color: #444;
+            font-size: 0.9rem;
+        }
+    </style>
 </head>
 <body>
 
-<header>
-    <div class="logo">
-        <img src="Opal" alt="Opal">
-        Opal
-    </div>
+    <div class="glow"></div>
 
-    <nav class="nav">
-        <a href="#">Features</a>
-        <a href="#">Download</a>
-        <a href="#">Docs</a>
+    <nav>
+        <div class="logo">Opal</div>
+        <div style="display: flex; gap: 30px; font-size: 0.9rem; font-weight: 500;">
+            <span>Features</span>
+            <span>Privacy</span>
+            <span>Community</span>
+        </div>
     </nav>
 
-    <a href="#" class="download-btn">Download</a>
-</header>
+    <section class="hero">
+        <h1>Beautifully Focused.</h1>
+        <p>Opal is a new kind of browser designed to get out of your way. Fast, private, and inspired by the clarity of Zen.</p>
+        
+        <a href="OpalBrowser.dmg" class="btn-download">
+            Download Opal for macOS
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+        </a>
+        <span style="margin-top: 15px; font-size: 0.8rem; color: #555;">Version 1.0 — Silicon & Intel</span>
+    </section>
 
-<section class="hero">
-    <div class="hero-content">
-
-        <h1>The Browser Built For Speed.</h1>
-
-        <p>
-            Opal is a modern browser designed for performance,
-            simplicity and productivity. Browse faster, stay
-            organized and enjoy a distraction-free experience.
-        </p>
-
-        <div class="hero-buttons">
-            <a href="#" class="primary">Download Opal</a>
-            <a href="#" class="secondary">Learn More</a>
-        </div>
-
-        <div class="browser-preview">
-            <div class="browser-bar">
-                <div class="dot"></div>
-                <div class="dot"></div>
-                <div class="dot"></div>
-            </div>
-
-            <div class="browser-content">
-                <h2>Opal</h2>
-            </div>
-        </div>
-
-    </div>
-</section>
-
-<section class="features">
-    <h2>Why Opal?</h2>
-
-    <div class="grid">
-
+    <section class="grid">
         <div class="card">
-            <h3>Fast</h3>
-            <p>Optimized for speed and low memory usage.</p>
+            <h3>Vertical Tabs</h3>
+            <p>Keep your workspace clean with a sidebar built for modern screens.</p>
         </div>
-
         <div class="card">
-            <h3>Modern UI</h3>
-            <p>Clean design focused on productivity.</p>
+            <h3>Privacy First</h3>
+            <p>No tracking. No fluff. Just the web, exactly as it should be.</p>
         </div>
-
         <div class="card">
-            <h3>Private</h3>
-            <p>Built with privacy-first browsing features.</p>
+            <h3>Opal Engine</h3>
+            <p>Optimized for low memory usage and blistering page load speeds.</p>
         </div>
+    </section>
 
-        <div class="card">
-            <h3>Customizable</h3>
-            <p>The browser adapts to your workflow.</p>
-        </div>
-
-    </div>
-</section>
-
-<footer>
-    © 2026 Opal Browser. All rights reserved.
-</footer>
+    <footer>
+        &copy; 2024 Opal Browser. Built for the modern web.
+    </footer>
 
 </body>
 </html>
