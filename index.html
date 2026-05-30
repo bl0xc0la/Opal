@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Opal Browser | Fast. Private. Radiant.</title>
+    <style>
+        :root {
+            /* Branding colors derived from your logo */
+            --bg-dark: #0a0a0f;
+            --opal-glow: linear-gradient(135deg, #4f46e5, #06b6d4, #a855f7);
+            --text-main: #ffffff;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        header {
+            padding: 2rem;
+            width: 100%;
+            text-align: center;
+        }
+
+        .hero {
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        .logo-placeholder {
+            width: 120px;
+            height: 120px;
+            background: var(--opal-glow);
+            border-radius: 25px;
+            margin-bottom: 2rem;
+            box-shadow: 0 0 40px rgba(79, 70, 229, 0.3);
+        }
+
+        h1 { font-size: 3.5rem; margin-bottom: 1rem; }
+
+        .btn-download {
+            padding: 1rem 2rem;
+            background: var(--opal-glow);
+            border: none;
+            border-radius: 50px;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .btn-download:hover { transform: scale(1.05); }
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav>Opal Browser</nav>
+    </header>
+
+    <main class="hero">
+        <div class="logo-placeholder"></div>
+        <h1>The Browser of the Future.</h1>
+        <p>Experience the web, redefined with Opal's speed and security.</p>
+        <button class="btn-download">Download Opal for macOS</button>
+    </main>
+
+</body>
+</html>
