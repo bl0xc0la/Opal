@@ -6,92 +6,266 @@
     <title>Opal - Documentation</title>
 
     <style>
-        body {
-            margin: 0;
-            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display",
-                         "Segoe UI", sans-serif;
-            background: #f5f5f7;
-            color: #1d1d1f;
-            line-height: 1.6;
+        :root {
+            --bg-main: #f8fafc;
+            --bg-surface: #ffffff;
+            --border-color: #e2e8f0;
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --accent: #0284c7;
+            --accent-hover: #0369a1;
+            
+            /* Callout colors */
+            --warning-bg: #fffbeb;
+            --warning-border: #f59e0b;
+            --warning-text: #78350f;
         }
 
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-main: #0f172a;
+                --bg-surface: #1e293b;
+                --border-color: #334155;
+                --text-main: #f8fafc;
+                --text-muted: #94a3b8;
+                --accent: #38bdf8;
+                --accent-hover: #7dd3fc;
+
+                --warning-bg: #451a03;
+                --warning-border: #d97706;
+                --warning-text: #fef3c7;
+            }
+        }
+
+        body {
+            margin: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background: var(--bg-main);
+            color: var(--text-main);
+            line-height: 1.7;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Top Header Navigation */
         header {
-            background: white;
-            border-bottom: 1px solid #d2d2d7;
-            padding: 24px;
+            background: var(--bg-surface);
+            border-bottom: 1px solid var(--border-color);
+            padding: 16px 32px;
             position: sticky;
             top: 0;
+            z-index: 10;
+            backdrop-filter: blur(8px);
+            background: rgba(255, 255, 255, 0.8);
+        }
+
+        @media (prefers-color-scheme: dark) {
+            header { background: rgba(30, 41, 59, 0.8); }
         }
 
         .header-content {
-            max-width: 900px;
+            max-width: 1400px;
             margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
         }
 
         .logo {
-            font-size: 32px;
+            font-size: 22px;
             font-weight: 700;
             margin: 0;
+            letter-spacing: -0.5px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .logo::before {
+            content: '';
+            display: inline-block;
+            width: 14px;
+            height: 14px;
+            background: linear-gradient(135deg, #38bdf8, #ec4899);
+            border-radius: 4px;
         }
 
         .subtitle {
-            color: #6e6e73;
-            margin-top: 6px;
+            color: var(--text-muted);
+            margin: 0;
+            font-size: 14px;
         }
 
+        /* Documentation Layout Wrapper */
+        .docs-wrapper {
+            max-width: 1400px;
+            width: 100%;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            flex-grow: 1;
+        }
+
+        /* Sidebar Navigation */
+        aside {
+            padding: 40px 32px;
+            position: sticky;
+            top: 65px;
+            height: calc(100vh - 65px);
+            overflow-y: auto;
+            border-right: 1px solid var(--border-color);
+        }
+
+        aside ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        aside li {
+            margin-bottom: 8px;
+        }
+
+        aside a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            display: block;
+            padding: 6px 12px;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+        }
+
+        aside a:hover {
+            color: var(--text-main);
+            background: var(--border-color);
+        }
+
+        /* Main Content Pane */
         main {
-            max-width: 900px;
-            margin: 40px auto;
-            padding: 0 24px;
+            padding: 40px 64px;
+            max-width: 800px;
         }
 
-        .card {
-            background: white;
-            border-radius: 18px;
-            padding: 32px;
-            margin-bottom: 24px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        section {
+            margin-bottom: 48px;
+            scroll-margin-top: 100px; /* Offset for sticky headers when jumping to links */
         }
 
         h2 {
-            margin-top: 0;
             font-size: 28px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            margin-top: 0;
+            margin-bottom: 16px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 8px;
         }
 
         h3 {
-            margin-top: 32px;
-            font-size: 22px;
+            font-size: 18px;
+            margin-top: 24px;
+            margin-bottom: 12px;
         }
 
-        ul {
-            padding-left: 24px;
+        p {
+            margin-top: 0;
+            margin-bottom: 16px;
+            color: var(--text-main);
+            opacity: 0.9;
         }
 
-        code {
-            background: #f0f0f2;
-            padding: 2px 6px;
-            border-radius: 6px;
-            font-family: monospace;
+        /* Refined Tech Grid/Badges */
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 12px;
+            padding: 0;
+            list-style: none;
+            margin: 20px 0;
         }
 
-        .warning {
-            background: #fff8e6;
-            border-left: 4px solid #ffb400;
+        .tech-card {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            padding: 12px 16px;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+
+        .tech-card strong {
+            color: var(--accent);
+            display: block;
+            font-size: 15px;
+            margin-bottom: 2px;
+        }
+
+        /* Beautiful Callout Box Component */
+        .callout {
+            background: var(--warning-bg);
+            border-left: 4px solid var(--warning-border);
+            color: var(--warning-text);
+            padding: 20px 24px;
+            border-radius: 0 12px 12px 0;
+            margin: 32px 0;
+        }
+
+        .callout h2, .callout h3 {
+            border: none;
+            color: var(--warning-text);
+            margin: 0 0 8px 0;
+            font-size: 18px;
+        }
+
+        .callout p {
+            color: var(--warning-text);
+            margin-bottom: 12px;
+            font-size: 15px;
+        }
+        
+        .callout p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Custom Content Lists */
+        .styled-list {
+            padding-left: 20px;
+            margin-bottom: 20px;
+        }
+
+        .styled-list li {
+            margin-bottom: 8px;
         }
 
         footer {
+            border-top: 1px solid var(--border-color);
+            background: var(--bg-surface);
             text-align: center;
-            color: #6e6e73;
-            padding: 40px 24px;
+            color: var(--text-muted);
+            padding: 24px;
+            font-size: 13px;
         }
 
-        @media (max-width: 768px) {
-            .card {
-                padding: 24px;
+        /* Responsive Breakpoints */
+        @media (max-width: 960px) {
+            .docs-wrapper {
+                grid-template-columns: 1fr;
             }
 
-            .logo {
-                font-size: 28px;
+            aside {
+                display: none; /* Hide sidebar on mobile viewports for simplicity */
+            }
+
+            main {
+                padding: 40px 24px;
+            }
+
+            .header-content {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 4px;
             }
         }
     </style>
@@ -102,90 +276,95 @@
 <header>
     <div class="header-content">
         <h1 class="logo">Opal Documentation</h1>
-        <p class="subtitle">Official documentation for the Opal web browser.</p>
+        <p class="subtitle">Official guide for the Opal web browser</p>
     </div>
 </header>
 
-<main>
-
-    <section class="card">
-        <h2>About Opal</h2>
-
-        <p>
-            Opal is a lightweight web browser focused on delivering a clean,
-            simple, and modern browsing experience.
-        </p>
-
-        <p>
-            The project is currently under active development and continues
-            to evolve with new features, improvements, and bug fixes.
-        </p>
-    </section>
-
-    <section class="card">
-        <h2>Technologies Used</h2>
-
-        <p>Opal is built using the following technologies:</p>
-
+<div class="docs-wrapper">
+    <aside>
         <ul>
-            <li><strong>C</strong> — Low-level and performance-critical components.</li>
-            <li><strong>C++</strong> — Core browser functionality and features.</li>
-            <li><strong>Swift</strong> — macOS integration and native functionality.</li>
-            <li><strong>Visual Studio Code</strong> — Primary development environment.</li>
+            <li><a href="#about">About Opal</a></li>
+            <li><a href="#technologies">Technologies Used</a></li>
+            <li><a href="#status">Development Status</a></li>
+            <li><a href="#issues">Known Issues</a></li>
+            <li><a href="#bugs">Reporting Bugs</a></li>
         </ul>
-    </section>
+    </aside>
 
-    <section class="card">
-        <h2>Development Status</h2>
+    <main>
+        <section id="about">
+            <h2>About Opal</h2>
+            <p>
+                Opal is a lightweight web browser focused on delivering a clean,
+                simple, and modern browsing experience.
+            </p>
+            <p>
+                The project is currently under active development and continues
+                to evolve with new features, performance improvements, and bug fixes.
+            </p>
+        </section>
 
-        <p>
-            Opal is experimental software. Some features may still be incomplete,
-            and users should expect occasional bugs while development continues.
-        </p>
+        <section id="technologies">
+            <h2>Technologies Used</h2>
+            <p>Opal is engineered from the ground up using a highly performant stack:</p>
+            
+            <ul class="tech-grid">
+                <li class="tech-card">
+                    <strong>C</strong> Low-level and performance-critical components.
+                </li>
+                <li class="tech-card">
+                    <strong>C++</strong> Core browser functionality and engine structures.
+                </li>
+                <li class="tech-card">
+                    <strong>Swift</strong> Native macOS user interface and window layers.
+                </li>
+                <li class="tech-card">
+                    <strong>VS Code</strong> Primary internal development environment.
+                </li>
+            </ul>
+        </section>
 
-        <p>
-            Feedback and bug reports are valuable and help improve future releases.
-        </p>
-    </section>
+        <section id="status">
+            <h2>Development Status</h2>
+            <p>
+                Opal is experimental software. Some features may still be incomplete,
+                and users should expect occasional instabilities while engine optimization continues.
+            </p>
+            <p>
+                Community feedback and core telemetry bug reports are highly valuable and directly shape our upcoming stable milestones.
+            </p>
+        </section>
 
-    <section class="card warning">
-        <h2>Known Issues</h2>
+        <section id="issues" class="callout">
+            <h2>Known Issues & Watchouts</h2>
+            <h3>History Window Freezing</h3>
+            <p>
+                Opening the native History window can occasionally cause the parent application interface controls to hang or become unresponsive.
+            </p>
+            <p>
+                <strong>Temporary Workaround:</strong> Force quit or restart Opal if your active instance's window frame becomes unresponsive.
+            </p>
+            <p>
+                <strong>Engine Status:</strong> High Priority • Currently under architectural investigation.
+            </p>
+        </section>
 
-        <h3>History Window Cannot Be Closed</h3>
+        <section id="bugs">
+            <h2>Reporting Bugs</h2>
+            <p>
+                If you encounter an exception or edge case while running workflows inside Opal, please structure your log with the following details:
+            </p>
 
-        <p>
-            Opening the History window may cause it to become impossible to close
-            using the normal interface controls.
-        </p>
-
-        <p>
-            <strong>Temporary workaround:</strong> Restart Opal if the History
-            window becomes unresponsive.
-        </p>
-
-        <p>
-            <strong>Status:</strong> Under investigation.
-        </p>
-    </section>
-
-    <section class="card">
-        <h2>Reporting Bugs</h2>
-
-        <p>
-            If you encounter an issue while using Opal, please include the
-            following information when reporting it:
-        </p>
-
-        <ul>
-            <li>Steps to reproduce the problem.</li>
-            <li>Expected behaviour.</li>
-            <li>Actual behaviour.</li>
-            <li>Your Opal version number.</li>
-            <li>Screenshots or recordings, if available.</li>
-        </ul>
-    </section>
-
-</main>
+            <ul class="styled-list">
+                <li>Deterministic steps required to reliably reproduce the problem.</li>
+                <li>Your actual expected application behavior.</li>
+                <li>The actual observed broken execution state.</li>
+                <li>Your exact current Opal framework version number.</li>
+                <li>System environment snapshots or video recordings (if available).</li>
+            </ul>
+        </section>
+    </main>
+</div>
 
 <footer>
     <p>Opal Documentation • Updated June 2026</p>
@@ -193,4 +372,3 @@
 
 </body>
 </html>
-```
