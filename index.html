@@ -4,10 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Opal | Browse with Clarity</title>
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
-    
+
     <style>
         :root {
             --bg: #050507;
@@ -20,10 +21,10 @@
             --radius: 14px;
         }
 
-        * { 
-            margin: 0; 
-            padding: 0; 
-            box-sizing: border-box; 
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
         html {
@@ -95,9 +96,9 @@
         }
 
         .nav-links {
-            display: flex; 
-            gap: 8px; 
-            font-size: 0.85rem; 
+            display: flex;
+            gap: 8px;
+            font-size: 0.85rem;
             font-weight: 500;
         }
 
@@ -146,9 +147,10 @@
 
         .download-container {
             display: flex;
-            flex-direction: column;
+            flex-wrap: wrap;
+            justify-content: center;
             align-items: center;
-            gap: 12px;
+            gap: 16px;
         }
 
         .btn-download {
@@ -176,51 +178,13 @@
         }
 
         .version-tag {
-            font-size: 0.75rem; 
+            width: 100%;
+            text-align: center;
+            font-size: 0.75rem;
             color: #475569;
             letter-spacing: 0.5px;
             font-weight: 500;
-        }
-
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 24px;
-            padding: 4rem 10% 6rem 10%;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .card {
-            background: var(--glass);
-            border: 1px solid var(--glass-border);
-            padding: 2.5rem;
-            border-radius: var(--radius);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-            position: relative;
-        }
-
-        .card:hover {
-            border-color: rgba(168, 85, 247, 0.3);
-            background: rgba(255, 255, 255, 0.03);
-            transform: translateY(-4px);
-            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
-        }
-
-        .card h3 {
-            font-family: 'Poppins', sans-serif;
-            margin-bottom: 0.75rem;
-            font-size: 1.4rem;
-            font-weight: 600;
-            letter-spacing: -0.5px;
-        }
-
-        .card p {
-            color: var(--text-dim);
-            font-size: 0.95rem;
-            line-height: 1.6;
+            margin-top: 8px;
         }
 
         footer {
@@ -233,12 +197,17 @@
         }
 
         @media (max-width: 768px) {
-            nav { padding: 1.25rem 6%; }
-            .grid { padding: 2rem 6% 4rem 6%; }
-            .nav-links { display: none; }
+            nav {
+                padding: 1.25rem 6%;
+            }
+
+            .nav-links {
+                display: none;
+            }
         }
     </style>
 </head>
+
 <body>
 
     <div class="glow-wrapper">
@@ -248,42 +217,35 @@
 
     <nav>
         <div class="logo">Opal</div>
+
         <div class="nav-links">
-            <a href="#features">Features</a>
-            <a href="#privacy">Privacy</a>
-            <a href="#community">Community</a>
+            <a href="https://opal.env.pm/features">Features</a>
+            <a href="https://opal.env.pm/docs">Documentation</a>
         </div>
     </nav>
 
     <section class="hero">
         <h1>Beautifully Focused.</h1>
-        <p>Opal is a new kind of browser engineered to get out of your way. Fast, private, and inspired by the clarity of Zen.</p>
-        
+
+        <p>
+            Opal is a new kind of browser engineered to get out of your way.
+            Fast, private, and inspired by the clarity of Zen.
+        </p>
+
         <div class="download-container">
+
             <a href="OpalBrowser.dmg" class="btn-download">
                 Download Opal for macOS
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                    <polyline points="7 10 12 15 17 10"></polyline>
-                    <line x1="12" y1="15" x2="12" y2="3"></line>
-                </svg>
             </a>
-            <span class="version-tag">VERSION 1.0 — SILICON & INTEL</span>
-        </div>
-    </section>
 
-    <section id="features" class="grid">
-        <div class="card">
-            <h3>Vertical Tabs</h3>
-            <p>Keep your workspace clean and modern with an optimized, collapsible sidebar built around how you actually scan web layouts.</p>
-        </div>
-        <div class="card">
-            <h3>Privacy First</h3>
-            <p>Zero downstream tracker traces. No telemetry bloat. Just speed, security, and raw rendering engine performance.</p>
-        </div>
-        <div class="card">
-            <h3>Opal Engine</h3>
-            <p>Fine-tuned architecture designed to drastically compress structural memory overhead while maximizing page load states.</p>
+            <a href="Opal.exe" class="btn-download">
+                Download Opal for Windows
+            </a>
+
+            <span class="version-tag">
+                VERSION 1.0 — macOS (SILICON & INTEL) • WINDOWS
+            </span>
+
         </div>
     </section>
 
